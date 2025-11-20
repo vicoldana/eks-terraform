@@ -7,9 +7,11 @@ module "eks" {
   vpc_id          = module.vpc.vpc_id
   subnet_ids      = module.vpc.private_subnets
 
+  # 🔹 Dezactivează complet IRSA și partea de IAM
   enable_irsa = false
-  create_iam_role = false
-  manage_aws_auth_configmap = false
+
+  # 🔹 Dezactivează toate add-on-urile care folosesc OIDC
+  cluster_addons = {}
 
   eks_managed_node_groups = {
     nodes = {
@@ -17,6 +19,9 @@ module "eks" {
       min_size      = 1
       max_size      = 3
       instance_types = ["t3.medium"]
+
+      # 🔹 dezactivează crearea automată de roluri IAM pentru noduri
+      create_iam_role = false
     }
   }
 
