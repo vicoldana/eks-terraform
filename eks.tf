@@ -7,8 +7,9 @@ module "eks" {
   vpc_id          = module.vpc.vpc_id
   subnet_ids      = module.vpc.private_subnets
 
-  # Dezactivează OIDC / IRSA pentru a evita eroarea de permisiune
   enable_irsa = false
+  create_iam_role = false
+  manage_aws_auth_configmap = false
 
   eks_managed_node_groups = {
     nodes = {
