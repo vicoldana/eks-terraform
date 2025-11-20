@@ -5,6 +5,7 @@ module "eks" {
   cluster_name    = "eks-sandbox"
   cluster_version = "1.30"
   vpc_id          = module.vpc.vpc_id
+  create_iam_oidc_provider = false
   subnet_ids      = module.vpc.private_subnets
   enable_irsa     = true
 
